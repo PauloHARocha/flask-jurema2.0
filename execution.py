@@ -33,12 +33,14 @@ def exec_script(filename, question_id):
         answer = read(process)
         terminate(process)
         write_answer = data['outputs'][idx]
+
+        res = {"input": inp, "answer": answer}
+        if idx < 2:
+            res["right_answer"] = write_answer
+
         if answer == write_answer:
-            if idx < 2:
-                response.append({"input": inp, "answer": answer, "right_answer": write_answer, "correct": True})
-            else:
-                response.append({"input": inp, "answer": answer, "correct": True })
+            res["correct"] = True
         else:
-            response.append({"input": inp, "answer": answer, "correct": False})
-    
+            res["correct"] = False
+        response.append(res)
     return response
