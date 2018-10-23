@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, json
 
 
 def start(executable_file):
@@ -20,3 +20,25 @@ def terminate(process):
     process.stdin.close()
     process.terminate()
     process.wait(timeout=2)
+
+def exec_script(filename, question_id):
+    response = []
+    with open('answers/answers_{}.json'.format(question_id)) as f:
+        data = json.load(f)
+        f.close()
+  
+    for idx,inp in enumerate(data['inputs']): 
+        process = start(f"./{filename}")
+        write(process, inp)
+        answer = read(process)
+        terminate(process)
+        write_answer = data['outputs'][idx]
+        if answer == write_answer:
+            if idx < 2:
+                response.append({"input": inp, "answer": answer, "right_answer": write_answer, "correct": True})
+            else:
+                response.append({"input": inp, "answer": answer, "correct": True })
+        else:
+            response.append({"input": inp, "answer": answer, "correct": False})
+    
+    return response
