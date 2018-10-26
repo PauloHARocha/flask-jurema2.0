@@ -28,6 +28,56 @@
                 "0 1 1 2 3"
             ]
         }
+    },
+    {
+          "name": "Remover repetidos",
+          "id": 3,
+          "level": "easy",
+          "description": "Crie uma função que retira todas os caracteres repetidos de uma string, considere um caractere maiúsculo como diferente do minúsculo",
+          "examples": {
+            "inputs": [
+                "papagaio",
+                "teste"
+            ],
+            "outputs": [
+                "pagio",
+                "tes"
+            ]
+        }
+    },
+    {
+          "name": "Ímpar ou par",
+          "id": 4,
+          "level": "easy",
+          "description": "Receba uma sequência de números inteiros e imprima como resultado para cada caso se o número é par ou impar.",
+          "examples": {
+            "inputs": [
+                "64 67 2 13 6",
+                "1 3 12"
+            ],
+            "outputs": [
+                "par impar par impar par",
+                "impar impar par"
+            ]
+        }
+    },
+    {
+          "name": "Validar CPF",
+          "id": 5,
+          "level": "hard",
+          "description": "Recebe uma sequencia como entrada e verifique se a mesma esta no formato de um CPF, deve-se adicionalmente aplicar o algoritmo para checar a validade do CPF fornecido, disponível em http://www.macoratti.net/alg_cpf.htm. Um CPF válido é aquele que passa no padrão e também no teste de validade",
+          "examples": {
+            "inputs": [
+                "123.456.789-01",
+                "111.444.777-30"
+            ],
+            "outputs": [
+                "Verdadeiro",
+                "Falso"
+            ]
+        }
     }
     ]
 }
+
+

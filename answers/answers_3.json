@@ -1,0 +1,28 @@
+{
+    "name": "Remover repetidos",
+    "id": 3,
+    "inputs": [
+        "paralelepipedo",
+        "EngenhariA",
+        "persistencia",
+        "mateus",
+        "faculdade",
+        "laboratorio",
+        "matemáticA",
+        "aaaaaaaaaaaaaaaaaaaaaaaah",
+        "aaabbbcccdddeeefffggghhhiijjkkklllmmmnnnooopppqqqrrrssstttuuuvvvxxxwwwyyyzzz",
+        "AaBbCcDdEeFfGg"
+    ],
+    "outputs": [
+        "parleido",
+        "EngehariA",
+        "persitnca",
+        "mateus",
+        "faculde",
+        "laborti",
+        "mateáicA",
+        "ah",
+        "abcdefghijklmnopqrstuvxwyz",
+        "AaBbCcDdEeFfGg"
+    ]
+}
