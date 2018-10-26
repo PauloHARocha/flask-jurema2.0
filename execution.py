@@ -1,6 +1,5 @@
 import subprocess, json
 
-
 def start(executable_file):
     return subprocess.Popen(
         ['python', executable_file],
@@ -9,17 +8,27 @@ def start(executable_file):
         stderr=subprocess.PIPE
     )
 
-def read(process):
-    return process.stdout.readline().decode("utf-8").strip()
-    
-def write(process, message):
-    process.stdin.write(f"{message.strip()}\n".encode("utf-8"))
-    process.stdin.flush()
+def comunicate(process, inp):
+    try:
+        inp = f"{inp.strip()}\n".encode("utf-8")
+        out, err = process.communicate(input=inp, timeout=3)  # recebe a resposta do script
+    except subprocess.TimeoutExpired:
+        process.kill()
+        out = 'Tempo máximo de execução expirado'
+        return out
+
+    return out.decode("utf-8").strip()
 
 def terminate(process):
     process.stdin.close()
     process.terminate()
     process.wait(timeout=2)
+
+def execute(filename, inp):
+    process = start(f"./{filename}")
+    answer = comunicate(process, inp)
+    terminate(process)
+    return answer
 
 def exec_script(filename, question_id):
     response = []
@@ -28,10 +37,8 @@ def exec_script(filename, question_id):
         f.close()
   
     for idx,inp in enumerate(data['inputs']): 
-        process = start(f"./{filename}")
-        write(process, inp)
-        answer = read(process)
-        terminate(process)
+
+        answer = execute(filename, inp)
         write_answer = data['outputs'][idx]
 
         res = {"input": inp, "answer": answer}
@@ -44,3 +51,11 @@ def exec_script(filename, question_id):
             res["correct"] = False
         response.append(res)
     return response
+
+
+# def read(process):
+#     return process.stdout.readline().decode("utf-8").strip()
+    
+# def write(process, message):
+#     process.stdin.write(f"{message.strip()}\n".encode("utf-8"))
+#     process.stdin.flush()
